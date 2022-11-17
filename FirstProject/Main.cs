@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Cache;
-using System.Text;
-using System.Threading.Tasks;
-
-/*
+﻿/*
  * 1.Zaprojektuj funkcje, która będzie zwracała użytkowników. Użytkownicy mają takie pola jak, imię, wiek, rodzaj konta (free, premium, admin),
  * oraz zwierzę które będzie posiadało imie, i wiek (samo zwierze jest polem opcjonalnym). Użykownik dodatkowo będzie miał także listę ostatnich logowań. 
  * Użytkownik ma możliwość zmienienia zwierzecia oraz rodzaju konta. Każdy użytkownik również bedzie miał identyfikator, którego nie można pobrać, 
@@ -17,45 +10,19 @@ namespace FirstProject
 {
     public class Main
     {
-        
-        List<User> UserList = new List<User>();  
-
-        
-       
-
-        
-
-        public void Stat(){
-
-            var user2 = new User("Andrzej", "28", AccountType.premium,new DateTime(1994,2,2), new Pet("Burek", 12)); 
-            var user3 = new User("Jan", "58", AccountType.free, new DateTime(2021,2,2));
-
-            UserList.Add(user2);
-            UserList.Add(user3);
-
-          
-
-
-                
-            user2.ChangeAccountType(AccountType.admin);
-
-
-            int i = 0;           
-            foreach (var user in UserList)
+        public void Stat()
+        {
+            List<User> UserList = new()
             {
-                i++;
-                var accountTime = user.TimeToDeleteAccount();
+                new User("Andrzej", "28", AccountType.Premium,new DateTime(1994,2,2), new Pet("Burek", 12)),
+                new User("Jan", "58", AccountType.Free, new DateTime(2022,11,11))
+            };          
 
-
-               
-                Console.WriteLine($"Imie uzytkownika {i}: {user.Name}, jego wiek {user.Age}, typ konta: {user.AccountType}, Data ostatniego logowania {user.LastLogin}, Opcjonalne imie psa i wiek: {user.Pet?.Name} , {user.Pet?.Age}, Konto zostanie usunięte za {accountTime}");
+         
+            for (int i = 0; i < UserList.Count; i++)
+            {
+                Console.WriteLine($"Imie uzytkownika {i}: {UserList[i].Name}, jego wiek {UserList[i].Age}, typ konta: {UserList[i].AccountType}, Data ostatniego logowania {UserList[i].LastLogin}, Opcjonalne imie psa i wiek: {UserList[i].Pet?.Name} , {UserList[i].Pet?.Age}, Konto zostanie usunięte za {UserList[i].TimeToDelete}");
             }
-            
-           
-
-
         }
-
-      
     }
 }
